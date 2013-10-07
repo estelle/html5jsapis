@@ -1,0 +1,731 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--[if gte IE 9]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]-->
+    <!--[if lt IE 9]><meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1" /><![endif]-->
+<meta charset="utf-8" />
+    <title>HTML5 JavaScript APIs</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body>
+
+<!-- Top instructions -->
+<div id="topinfo"></div>
+<!-- footer instructions -->
+<div id="info">
+    <p><a href="http://standardista.com">Estelle Weyl</a> | <a href="http://twitter.com/estellevw">@estellevw</a> | <a href="http://github.com/estelle">Github</a> | Press <span class="key">&rarr;</span> to advance, <span class="key">2</span> for comments, <span class="key">4</span> to read/write notes.</p>
+</div>
+
+  <div id="presentation">
+   <div id="presentation-counter"></div>
+   <div id="slides">
+
+    <div class="slide intro">
+     <header><hgroup>
+      <h1>HTML5 JavaScript APIs</h1>
+      <h2>Estelle Weyl</h2>
+     </hgroup></header>
+    </div>
+
+    <div class="slide intro">
+     <header><hgroup>
+      <h1><span class="enlargenslowly">4,213</span> HTML5 JavaScript APIs</h1>
+      <h2>Estelle Weyl</h2>
+     </hgroup></header>
+    </div>
+
+
+<div class="slide normal">
+<header><h1>Animation</h1></header>
+<section class="content">
+<pre contenteditable>.enlargenslowly {
+  display: inline-block;
+  -webkit-animation: enlargen 1s alternate 6 3s;
+  animation: enlargen 1s alternate 6 3s;
+}
+
+@-webkit-keyframes enlargen {
+  100% { -webkit-transform: scale(1.2); }
+}
+@keyframes enlargen {
+  100% { transform: scale(1.2); }
+}</pre>
+</section>
+</div>
+
+<div class="slide">
+ <header>
+    <h1>Animation Essentials</h1>
+ </header>
+ <section class="content">
+     <ul class="imp">
+        <li>@keyframes</li>
+        <li>animation-name</li>
+        <li>animation-duration</li>
+        <li>animation-direction</li>
+        <li>animation-iteration-count</li>
+        <li>animation-delay<br></li>
+        <li>animation-timing-function</li>
+        <li>animation-fill-mode</li>
+        <li>animation-play-state</li>
+      </ul>
+      <p><a href="http://estelle.github.io/animation/">See Tutorial</a></p>
+ </section>
+</div>
+
+
+<div class="slide normal">
+<header><h1><b style="color: black">Deck Feature:</b><br>You can take notes</h1></header>
+<section class="content">
+<p>Click on the #4 to show some notes</p>
+<p>They're stored with local storage</p>
+</section>
+</div>
+
+<div class="slide">
+  <header><h1>LocalStorage (+ classList, selectors API)</h1></header>
+    <section class="content">
+      <pre contenteditable>
+addNotes: function(){
+  var ta = document.<strong>querySelector</strong>('.current .notes'),
+      key;
+
+  ta.<strong>classList.toggle</strong>('temphidden');
+  key = firstPartOfKey() +  window.location.hash;
+  ta.value = <strong>window.localStorage.getItem(key)</strong> || '';
+
+  ta.addEventListener('keyup', function(){
+      <strong>window.localStorage.setItem(key,ta.value);</strong>
+  });
+}</pre>
+    </section>
+</div>
+
+<div class="slide">
+  <header><h1>CubeeDoo</h1></header>
+    <section class="content">
+      <object data="file:///Users/estellevw/Documents/Clients/Cubeedoo/index.html" width="340" height="440" style="float: left; margin-right: 40px"></object>
+      <ul>
+        <li>localStorage</li>
+        <li>sessionStorage</li>
+        <li>application cache</li>
+        <li>audio</li>
+        <li>selectors API</li>
+        <li>custom data attributes/dataSet API</li>
+        <li>Transitions</li>
+        <li>Transforms</li>
+        <li>CSS Generated Content</li>
+    </section>
+</div>
+
+<div class="slide">
+  <header><h1>Pause / New Button</h1></header>
+    <section class="content">
+<pre contenteditable><strong>eventHandlers:</strong> function(){
+ if('ontouchstart' in window ||
+    'createTouch' in document ||
+    (window.DocumentTouch &&
+    document instanceof DocumentTouch)) {
+        qbdoo.btn_pause.addEventListener('<strong>touchend</strong>',
+        qbdoo.pauseGameOrNewGame);
+    } else {
+        qbdoo.btn_pause.addEventListener('<strong>click</strong>',
+        qbdoo.pauseGameOrNewGame);
+    }
+  },</pre>
+
+    <pre contenteditable><strong>pauseGameOrNewGame:</strong> function(){
+  if (qbdoo.game.<strong>classList.contains('over')</strong>) {
+    qbdoo.startNewGame();
+  } else {
+    qbdoo.pauseGame();
+  }
+},</pre>
+    </section>
+</div>
+
+<div class="slide">
+  <header><h1>Pause Game</h1></header>
+    <section class="content">
+<pre contenteditable style="max-height: 500px; overflow: scroll;">pauseGame: function(newgame) {
+  var currentState = {}, i, cardinfo = [];
+
+  // if game is paused
+  if(qbdoo.game.<strong>classList.contains('paused')</strong>){
+    qbdoo.playGame(); return false;
+  }
+
+  // else
+  qbdoo.pauseOrPlayBoard('pause');
+  currentState = qbdoo.storeValues();
+  for (i = 0; i &lt; qbdoo.cardCount; i++) {
+    cardinfo.push(qbdoo.cards[i].<strong>dataset</strong>);
+  }
+  // add level to value set
+  currentState.currentLevel = qbdoo.currentLevel;
+  currentState.cardPositions = <strong>JSON.stringify</strong>(cardinfo);
+
+  // add to local storage
+  <strong>localStorage.setItem</strong>('pausedgame', JSON.stringify(currentState));
+
+  //clear the board
+  qbdoo.clearAll();
+},</pre>
+    </section>
+</div>
+
+<div class="slide intro">
+  <header><hgroup><h1>Selectors API</h1></hgroup></header>
+    <section class="content">
+    </section>
+</div>
+
+
+<div class="slide">
+<header>
+<h1>Don't do this</h1></header>
+<section>
+<pre>&lt;script src="jquery.js"&gt;&lt;/script>
+
+&lt;script type="text/javascript">
+   $('li:first').addClass('first');
+&lt;/script>
+</pre>
+
+<p>jquery.min.js<br/>
+from: ajax.googleapis.com/ajax/libs/jquery/1.7.2<br/>
+96.2KB + HTTP request + 4J + DNS lookup</p>
+
+</section>
+</div>
+
+<div class="slide normal">
+<header>
+  <h1>Natively...</h1>
+</header>
+
+<section style="margin-left:0;">
+<p>vanilla js</p>
+<pre contenteditable style="margin-right:-40px">
+document.<strong style="color: red">querySelector('li')</strong>.<strong>classList.add('first')</strong>;
+</pre>
+<p>or simply</p>
+<pre>li:first-of-type {
+    /* <strong>.first</strong> declarations */
+}</pre>
+</section>
+</div>
+
+
+ <div class="slide normal">
+<header><h1>Selectors API*</h1></header>
+<section class="content">
+<pre contenteditable>var chil = $('#bar .foo');</pre>
+<p>Natively</p>
+<pre contenteditable>var el   = document.<strong>querySelector</strong>('#bar');
+
+var chil = el.<strong>querySelectorAll</strong>('.foo'); **</pre>
+<p>or</p>
+<pre contenteditable>chil = d.<strong>querySelectorAll</strong>('#bar .foo');</pre>
+
+
+<p class="pop">*Supported since IE8</span></p>
+<p>**Returns a static nodelist</p>
+</section>
+</div>
+
+<div class="slide intro">
+  <header><hgroup><h1>classList</h1></hgroup></header>
+    <section class="content">
+    </section>
+</div>
+
+
+<div class="slide normal">
+<header><h1>classList</h1></header>
+<section class="content">
+<pre contenteditable>
+<span style="font-size: 0.85rem;">$('#foo').</span><strong>addClass</strong>('bar');
+<span style="font-size: 0.85rem;">$('#foo').</span><strong>removeClass</strong>('bar');
+<span style="font-size: 0.85rem;">$('#foo').</span><strong>toggle</strong>('bar');
+<span style="font-size: 0.85rem;">$('#foo').</span><strong>hasClass</strong>('bar');</pre>
+
+<pre contenteditable style=" margin-right:-80px;">
+<span style="font-size: 0.85rem;">document.querySelector('#foo').</span><strong>classList.add</strong>('bar');
+<span style="font-size: 0.85rem;">document.querySelector('#foo').</span><strong>classList.remove</strong>('bar');
+<span style="font-size: 0.85rem;">document.querySelector('#foo').</span><strong>classList.toggle</strong>('bar');</pre>
+
+<pre contenteditable>
+fooCL = document.querySelector('#foo').</span><strong>classList</strong>;
+fooCL.<strong>add</strong>('bar');
+fooCL.<strong>remove</strong>('bar');
+fooCL.<strong>toggle</strong>('bar');
+fooCL.<strong>contains</strong>('bar'); // true or false</pre>
+
+<p>* Late to the game: Android 3,IE 10</p>
+      </section>
+  </div>
+
+
+ <div class="slide normal">
+<header><h1>no native iterations</h1></header>
+<section class="content">
+<p>jQuery</p>
+<pre contenteditable>
+$('.foo').addClass('bar');</pre>
+
+<p>Native</p>
+<pre contenteditable>
+var foos = document.querySelectorAll('.foo');
+
+for(var i = 0; i &lt; foos.length; i++){
+  foos[i].classList.add('bar');
+}</pre>
+
+</section>
+</div>
+
+<div class="slide intro">
+  <header><hgroup><h1>Custom Data Attributes</h1></hgroup></header>
+    <section class="content">
+    </section>
+</div>
+
+<div class="slide">
+  <header><h1>Card Markup</h1></header>
+    <section class="content">
+<pre contenteditable style="height: 500px; overview: scroll">
+&lt;div id=&quot;board&quot; class=&quot;level1&quot;&gt;
+  &lt;div data-value=&quot;2&quot; data-position=&quot;1&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div data-value=&quot;4&quot; data-position=&quot;2&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div data-value=&quot;7&quot; data-position=&quot;3&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div data-value=&quot;3&quot; data-position=&quot;4&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+ &lt;div data-value=&quot;1&quot; data-position=&quot;5&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div data-value=&quot;6&quot; data-position=&quot;6&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div data-value=&quot;6&quot; data-position=&quot;7&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div data-value=&quot;7&quot; data-position=&quot;8&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+ &lt;div data-value=&quot;8&quot; data-position=&quot;9&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div data-value=&quot;2&quot; data-position=&quot;10&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div data-value=&quot;1&quot; data-position=&quot;11&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div data-value=&quot;4&quot; data-position=&quot;12&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+ &lt;div data-value=&quot;5&quot; data-position=&quot;13&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div data-value=&quot;3&quot; data-position=&quot;14&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div data-value=&quot;8&quot; data-position=&quot;15&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div data-value=&quot;5&quot; data-position=&quot;16&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+ &lt;div data-value=&quot;0&quot; data-position=&quot;17&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div data-value=&quot;0&quot; data-position=&quot;18&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div data-value=&quot;0&quot; data-position=&quot;19&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div data-value=&quot;0&quot; data-position=&quot;20&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+ &lt;div data-value=&quot;0&quot; data-position=&quot;21&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div data-value=&quot;0&quot; data-position=&quot;22&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div data-value=&quot;0&quot; data-position=&quot;23&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div data-value=&quot;0&quot; data-position=&quot;24&quot;&gt;
+  &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;</ore>
+    </section>
+</div>
+
+<div class="slide intro">
+  <header><hgroup><h1>Dataset API</h1></hgroup></header>
+    <section class="content">
+    </section>
+</div>
+
+<div class="slide normal">
+<header><h1>Author-defined attributes!</h1></header>
+<section class="content">
+<p>Add attributes to elements in the form of <strong class="textmask">data-name</strong> and  access these through the DOM using <strong class="textmask">dataset[name]</strong> on the element in question.</p>
+<pre contenteditable>&lt;p <strong class="textmask">data-foo-bar="test"</strong>&gt;
+  <span data-foo-bar="test" id="dataset_01">That's an author defined attribute</span>
+&lt;/p></pre>
+<p><strong class="textmask">dataset</strong> property returns a <strong>DOMStringMap</strong> object of element's <strong>data-</strong> attributes</p>
+<pre contenteditable>el.<strong class="textmask">dataset</strong>[<strong class="textmask">'fooBar'</strong>]</pre>
+ </section>
+</div>
+
+
+
+ <div class="slide normal">
+<header><h1>dataset</h1></header>
+<section class="content">
+<p>dataset is a convenience feature for handling the data-* attributes, which are exposed as <strong class="textmask">camel-cased</strong> properties.</p>
+ <pre contenteditable>e.dataset.fooBar = 'test'
+e.dataset.value = '5'
+e.dataset.position = '6' </pre>
+<p>sets the <strong class="textmask">data-foo-bar</strong> or <strong class="textmask">data-value</strong> attribute on <strong class="textmask">e</strong>.</p>
+<pre contenteditable>d.body.dataset.fooBar = 'frog';
+
+alert("A) " + d.body.getAttribute('data-foo-bar'));
+alert("B) " + d.body.dataset['fooBar']);
+alert("C) " + d.body.dataset.fooBar);</pre><button onclick="datasetfrog();">Test</button>
+
+</section>
+</div>
+
+
+
+<div class="slide">
+  <header><h1>Pause Game</h1></header>
+    <section class="content">
+<pre contenteditable style="max-height: 500px; overflow: scroll;">pauseGame: function(newgame) {
+  var currentState = {}, i, cardinfo = [];
+
+  // if game is paused
+  if(qbdoo.game.<strong>classList.contains('paused')</strong>){
+    qbdoo.playGame(); return false;
+  }
+
+ // else
+  qbdoo.pauseOrPlayBoard('pause');
+  currentState = qbdoo.storeValues();
+   <span class="inverse">for (i = 0; i &lt; qbdoo.cardCount; i++) {
+    cardinfo.push(qbdoo.cards[i].<strong>dataset</strong>);
+  }</span>
+  // add level to value set
+  currentState.currentLevel = qbdoo.currentLevel;
+  <span class="inverse">currentState.cardPositions = JSON.stringify(cardinfo);</span>
+
+  // add to local storage
+  <strong>localStorage.setItem</strong>('pausedgame', JSON.stringify(currentState));
+
+  <span class="inverse">//clear the board
+  qbdoo.clearAll();</span>
+},</pre>
+    </section>
+</div>
+
+<div class="slide">
+  <header><h1>Clear All. getValue</h1></header>
+    <section class="content">
+<pre contenteditable> clearAll: function() {
+    for (var i = 0; i &lt; qbdoo.cardCount; i++) {
+      qbdoo.cards[i].dataset.value = 0;
+    }
+  },</pre>
+<pre contenteditable> getValue: function(mycard) {
+    return mycard.dataset['value'];
+  },</pre>
+    </section>
+</div>
+
+<div class="slide">
+  <header><h1></h1></header>
+    <section class="content">
+  <pre contenteditable><strong>setupGame:</strong> function(savedCards) {
+  var cardsValues, cards, dbsize;
+  <span class="inverse">// if starting from pause
+  if(savedCards) {
+    cardsValues = JSON.parse(savedCards);
+    for(i = 0; i &lt; qbdoo.cardCount; i++){
+      for (key in cardsValues[i]) {
+        qbdoo.cards[i].dataset[key] = cardsValues[i][key];
+      }
+    }
+  } </span>else { // not from pause
+ if (qbdoo.iterations &&
+  (qbdoo.iterations%qbdoo.iterationsPerLevel == 0)){
+     qbdoo.levelUp();
+ }
+
+// populate all the active blocks with data valuess
+for (var i = 1; i <= qbdoo.cardCount; i++) {
+  var num = "";
+  while (!num) {
+    num = qbdoo.randomize();
+  }
+
+      // set the data-value for each card
+      qbdoo.board.querySelector("div[data-position='" + i + "']").setAttribute("data-value", num);
+      }
+      // add to iterations so that iterationsPerLevel will eventually cause a level increase.
+      qbdoo.iterations++;
+    }
+    if(qbdoo.storageType !== "local"){
+      if(!qbdoo.db){
+        if (window.openDatabase) {
+          dbSize = 5 * 1024 * 1024;
+            qbdoo.db = openDatabase("highscoresDB", "1.0", "scores", 200000);
+          }
+      }
+      qbdoo.loadHighScoresSQL();
+      qbdoo.loadHighScoresSQL();
+    } else {
+      qbdoo.loadHighScoresLocal();
+    }
+    qbdoo.renderHighScores();
+    qbdoo.cardarray = [];
+    qbdoo.cardarray2 = [];
+    qbdoo.timerPause = true;
+    qbdoo.pauseOrPlayBoard('pause');
+    qbdoo.cardClicks();
+    qbdoo.eventHandlers();
+    qbdoo.setTimer(savedCards);
+    qbdoo.changeTheme();
+    qbdoo.congratulations('off');
+    qbdoo.writeLevel();
+  },</pre></section>
+</div>
+
+<div class="slide normal">
+      <header>
+         <h1>data-* attributes
+         </h1>
+      </header>
+
+      <section class="content">
+
+         <p class="notes">Define your own DOM manipulable data attributes</p>
+        <pre contenteditable>
+  &lt;div data-value=&quot;0&quot; data-position=&quot;24&quot;&gt;
+    &lt;div class=&quot;face&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;back&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;</pre>
+
+        <p><small>All browsers support "data-*", but full support of 'dataset started with IE10, FF6, Safari 5.1, Chrome 7, Opera 11.1. Supported in iOS and Android. <a href="http://eligrey.com/blog/post/html-5-dataset-support">Polly fill</a> </small></p>
+      </section>
+  </div>
+
+
+<div class="slide normal">
+<header><h1>Notes on data- &amp; dataset</h1></header>
+<section class="content">
+<ul>
+<li>Intended for site scripts, not publicly-usable metadata. </li>
+<li>data-name is case insensitive (html), as it converts to lowercase (xhtml)</li>
+<li>In JS, data-name is camelCased. Drop the "data-"</li>
+<li>All browsers can  use data-* attributes, accessing via <strong class="textmask">getAttribute</strong>. </li>
+<li>All browsers <strong class="textmask">EXCEPT IE</strong> support accessing values with <strong class="textmask">dataset</strong> property.</li>
+</ul>
+<p class="pop"><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/elements.html#dom-dataset">WHAT-WG Specification</a></p>
+</section>
+</div>
+
+
+<div class="slide">
+  <header><h1>Generated Content</h1></header>
+    <section class="content">
+      <p>Part of CSS 2.1. Supported since IE8</p>
+      <p>for the number theme, change &lt;body&gt; class to "n"</p>
+<pre contenteditable style="overflow: scroll">
+.n div[data-value="1"]  .face:after { content: '1';}
+.n div[data-value="2"]  .face:after { content: '2';}
+.n div[data-value="3"]  .face:after { content: '3';}
+.n div[data-value="4"]  .face:after { content: '4';}
+.n div[data-value="5"]  .face:after { content: '5';}
+.n div[data-value="6"]  .face:after { content: '6';}
+.n div[data-value="7"]  .face:after { content: '7';}
+.n div[data-value="8"]  .face:after { content: '8';}
+.n div[data-value="9"]  .face:after { content: '9';}
+.n div[data-value="10"] .face:after { content:'10';}
+.n div[data-value="11"] .face:after { content:'11';}
+.n div[data-value="12"] .face:after { content:'12';}
+</pre>
+    </section>
+</div>
+
+<div class="slide">
+  <header><h1>Generated Content</h1></header>
+    <section class="content">
+      <p>for the font shape theme, change &lt;body&gt; class to "s"</p>
+<pre contenteditable style="overflow: scroll">
+.s div[data-value="1"]  .face:after { content:'★';}
+.s div[data-value="2"]  .face:after { content:'⚫';}
+.s div[data-value="3"]  .face:after { content:'⬣';}
+.s div[data-value="4"]  .face:after { content:'◼';}
+.s div[data-value="5"]  .face:after { content:'⬆';}
+.s div[data-value="6"]  .face:after { content:'►';}
+.s div[data-value="7"]  .face:after { content:'♦';}
+.s div[data-value="8"]  .face:after { content:'♥';}
+.s div[data-value="9"]  .face:after { content:'♣';}
+.s div[data-value="10"] .face:after { content:'♠';}
+.s div[data-value="11"] .face:after { content:'☻'}
+.s div[data-value="12"] .face:after { content:'⬇';}
+</pre>
+    </section>
+</div>
+
+<div class="slide">
+  <header><h1>Generated Content</h1></header>
+    <section class="content">
+      <p>What you need to know:</p?>
+        <ul>
+          <li>Works with <code>:before</code> and <code>:after</code></li>
+          <li><code>content: '';</code> is the minimum required</li>
+          <li><code>top:0; bottom:0; left:0; right:0;</code></li>
+          <li>counters</li>
+          <li>attributes <code>attr(x)</code></li>
+          <li><a href="http://estelle.github.io/CSS-Workshop/part_03_generated.html#slide4">Tutorial on Generated Content</a></li>
+        </ul>
+    </section>
+</div>
+
+<div class="slide intro">
+  <header><hgroup><h1>Going Offline</h1></hgroup></header>
+    <section class="content">
+    </section>
+</div>
+
+<div class="slide">
+      <header>
+         <h1>ApplicationCache
+         </h1>
+      </header>
+
+      <section class="content">
+      <pre contenteditable="">&lt;!doctype HTML&gt;<br>&lt;html manifest="cache.manifest"&gt;<br>&lt;meta charset="utf-8"/&gt;...</pre>
+      <pre contenteditable="">CACHE MANIFEST
+#version01
+
+#files that explicitly cached
+CACHE:
+index.html
+css/styles.css
+scripts/application.js
+
+#Resources requiring connectivity
+NETWORK:
+signin.php
+dosomething.cgi
+
+FALLBACK:
+404.html</pre>
+</div>
+
+
+<div class="slide">
+      <header>
+         <h1>ApplicationCache
+         </h1>
+      </header>
+      <section class="content">
+      <p>Add to .htaccess file</p>
+      <pre contenteditable="">AddType text/cache-manifest manifest</pre>
+      <pre contenteditable="">if(window.applicationCache){
+ var appCache = window.applicationCache;
+ appCache.update();
+ if (appCache.status == appCache.UPDATEREADY ){
+      appCache.swapCache();
+ }
+}</pre>
+      </section>
+</div>
+
+
+<div class="slide intro">
+  <header><hgroup><h1>Video</h1></hgroup></header>
+    <section class="content">
+    </section>
+</div>
+
+<div class="slide intro">
+  <header><hgroup><h1>Transitions</h1></hgroup></header>
+    <section class="content">
+    </section>
+</div>
+
+<div class="slide intro">
+  <header><hgroup><h1>Transforms</h1></hgroup></header>
+    <section class="content">
+    </section>
+</div>
+
+   </div>
+
+<header>
+    <nav>
+        <ul>
+            <li class="button cancel" id="back">Back</li>
+            <li class="button done" id="next">Next</li>
+        </ul>
+    </nav>
+</header>
+</div>
+<script src="script.js"></script>
+<script>
+function datasetfrog() {
+  console.log('here')
+  var d = document;
+d.body.dataset.fooBar = 'frog';
+
+alert("A) " + d.body.getAttribute('data-foo-bar'));
+alert("B) " + d.body.dataset['fooBar']);
+alert("C) " + d.body.dataset.fooBar)
+}
+</script>
+
+  </body>
+
+</html>
+
