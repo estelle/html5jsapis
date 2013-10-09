@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--[if lt IE 9]><meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1" /><![endif]-->
+    <meta charset="utf-8" />
+    <title>Animation</title>
+    <style>
+    .card {
+  width: 200px;
+  height: 300px;
+  border-radius: 10px;
+  margin: auto;
+  position: absolute;
+  font-size: .8em;
+  perspective: 600px;
+}
+.card .front {
+float: none;
+position: absolute;
+top: 0;
+left: 0;
+z-index: 900;
+width: inherit;
+height: inherit;
+  border-radius: 10px;
+  border: 10px solid #fff;
+text-align: center;
+box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+background:
+linear-gradient(-45deg, white 25%, transparent 25%, transparent 75%, red 75%, red) 0 0,
+linear-gradient(-45deg, red 25%, transparent 25%, transparent 75%, white 75%, white) 1em 1em,
+linear-gradient(45deg, red 17%, transparent 17%, transparent 25%, red 25%, red 36%, transparent 36%, transparent 64%, red 64%, red 75%, transparent 75%, transparent 83%, red 83%) 1em 1em;
+background-color: white;
+background-size: 2em 2em;
+background-position: -1em -1em;
+
+}
+
+.card .back {
+  float: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 800;
+  width: inherit;
+  height: inherit;
+  background: #fff;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.6);
+  border-radius: 10px;
+  border: 10px solid #fff;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.9);
+}
+
+
+
+
+.card .back, .carda .back {color:red; font-size: 50px; line-height: 300px; text-align:center;}
+.card .back:after,
+.carda .back:after  {content: 'A'; position:absolute; top: 10px; left: 10px; line-height:20px;}
+.card .back:before,
+.carda .back:before {content: 'A'; position:absolute; bottom: 10px; right: 10px; line-height:20px;}
+style {left: 200px !important;}
+    </style>
+    <link rel="stylesheet" href="object.css"/>
+
+
+
+<style contenteditable>
+.card {
+  position: absolute;
+  -webkit-perspective: 600px;
+}
+.card .front {
+  -webkit-transform: rotateX(0deg) rotateY(0deg);
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+}
+.card:hover .front {
+  -webkit-transform: rotateY(180deg);
+}
+.card .back {
+  -webkit-transform: rotateY(-180deg);
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+}
+.card:hover .back {
+  -webkit-transform: rotateY(0);
+}
+.card:first-of-type {
+  -webkit-transform: rotate(-5deg);
+}
+.card:nth-of-type(2):hover {
+  -webkit-transform: rotate(0) translatex(120px);
+}
+.card:last-of-type {
+  -webkit-transform: rotate(5deg);
+}
+.card:first-of-type:hover {
+  -webkit-transform: rotate(10deg) translatey(180px);
+}</style>
+</head>
+
+<body class="slide current">
+<section class="content">
+<div class="card">
+        <div class="front"></div>
+        <div class="back">♥</div>
+    </div>
+    <div class="card">
+        <div class="front"></div>
+        <div class="back" style="color: black">♣</div>
+    </div>
+    <div class="card">
+        <div class="front"></div>
+        <div class="back">♦</div>
+    </div>
+</section>
+</body>
+</html>

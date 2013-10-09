@@ -35,14 +35,21 @@
      </hgroup></header>
     </div>
 
+<div class="slide object">
+  <object data="objects/animatedtext.html"></object>
+  <header><h1></h1></header>
+    <section class="content">
+    </section>
+</div>
 
+<!--
 <div class="slide normal">
-<header><h1>Animation</h1></header>
+<header><h1 class="enlargenslowly" style="-webkit-transform-origin: left center;">Animation</h1></header>
 <section class="content">
 <pre contenteditable>.enlargenslowly {
   display: inline-block;
-  -webkit-animation: enlargen 1s alternate 6 3s;
-  animation: enlargen 1s alternate 6 3s;
+  -webkit-animation: enlargen 1s alternate 12 1s;
+  animation: enlargen 1s alternate 12 1s;
 }
 
 @-webkit-keyframes enlargen {
@@ -53,6 +60,7 @@
 }</pre>
 </section>
 </div>
+-->
 
 <div class="slide">
  <header>
@@ -107,15 +115,16 @@ addNotes: function(){
     <section class="content">
       <object data="file:///Users/estellevw/Documents/Clients/Cubeedoo/index.html" width="340" height="440" style="float: left; margin-right: 40px"></object>
       <ul>
+        <li>animation</li>
         <li>localStorage</li>
         <li>sessionStorage</li>
-        <li>application cache</li>
-        <li>audio</li>
         <li>selectors API</li>
         <li>custom data attributes/dataSet API</li>
+        <li>CSS Generated Content</li>
+        <li>application cache</li>
         <li>Transitions</li>
         <li>Transforms</li>
-        <li>CSS Generated Content</li>
+        <li>Audio</li>
     </section>
 </div>
 
@@ -684,22 +693,132 @@ FALLBACK:
 
 
 <div class="slide intro">
-  <header><hgroup><h1>Video</h1></hgroup></header>
+  <header><hgroup><h1>Transforms</h1></hgroup></header>
     <section class="content">
     </section>
 </div>
+<div class="slide object">
+  <object data="objects/transforms.html"></object>
+  <header><h1></h1></header>
+    <section class="content">
+    </section>
+</div>
+
 
 <div class="slide intro">
   <header><hgroup><h1>Transitions</h1></hgroup></header>
     <section class="content">
     </section>
 </div>
-
-<div class="slide intro">
-  <header><hgroup><h1>Transforms</h1></hgroup></header>
+<div class="slide object">
+  <object data="objects/transition.html"></object>
+  <header><h1></h1></header>
     <section class="content">
     </section>
 </div>
+
+
+
+<div class="slide">
+<header><h1>transitions</h1></header>
+<section class="content">
+<p>Enables the transition of properties from one state to the next over a defined length of time</p>
+<ul>
+<li><em>transition-property:</em> properties (or 'all') that transition</li>
+<li><em>transition-duration:</em> s or ms it takes to transition</li>
+<li><em>transition-timing-function:</em> bezier curve of transition</li>
+<li><em>transition-delay:</em> s or ms before transition starts</li>
+<li><em>transition:</em> shorthand for 4  transition properties</li>
+</ul>
+<p>All browsers, prefixed. No prefix FF16 &amp; IE10. Not in OperaMini or Win✆</li>
+     </ul>
+</section>
+</div>
+
+
+<div class="slide object">
+  <object data="objects/permtransition.html"></object>
+  <header><h1></h1></header>
+    <section class="content">
+    </section>
+</div>
+
+<div class="slide intro">
+  <header><hgroup><h1>Audio</h1></hgroup></header>
+    <section class="content">
+    </section>
+</div>
+
+<div class="slide">
+  <header><h1>property assignment</h1></header>
+    <section class="content">
+
+      <pre contenteditable>var qbdoo = {
+  ...
+  match: 'assets/match.mp3',
+  noMatch: 'assets/notmatch.mp3',
+  mute: false,
+  ...</pre>
+        <pre contenteditable>var qbdoo = {
+  ...
+  match: document.getElementById('match'),
+  noMatch: document.getElementById('noMatch'),
+  mute: false,
+  ...</pre>
+
+    </section>
+</div>
+
+
+<div class="slide">
+  <header><h1>On the fly....</h1></header>
+    <section class="content">
+      <pre contenteditable>
+playSound: function(matched){
+  //if sound is off for game, skip
+  if(qbdoo.mute) {
+    return false;
+  }
+  if(!qbdoo.audio){
+    qbdoo.audio = document.createElement('audio')
+  }
+  if(matched){
+    qbdoo.audio.src = qbdoo.match;
+  }
+  else {
+    qbdoo.audio.src = qbdoo.noMatch;
+  }
+  qbdoo.audio.play();
+}
+      </pre>
+    </section>
+</div>
+
+<div class="slide">
+  <header><h1>in the markup ...</h1></header>
+    <section class="content">
+      <pre contenteditable>
+playSound: function(matched){
+  if(qbdoo.mute) {
+    return false;
+  }
+  if(matched){
+    qbdoo.match.play();
+  } else {
+    qbdoo.noMatch.play();
+  }
+}
+</pre>
+<pre contenteditable>&lt;audio id=match preload src=match.mp3>&lt;/audio>
+&lt;audio id=noMatch preload src=fail.mp3>&lt;/audio>
+&lt;audio id=gameover preload src=gameover.mp3>&lt;/audio></pre>
+    </section>
+</div>
+
+
+
+
+
 
    </div>
 

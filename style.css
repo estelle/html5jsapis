@@ -234,7 +234,7 @@ h1 {
   margin-bottom: 0px;
   letter-spacing: 0.25px;
 }
-h1, a {
+h1, a, em {
   color: #e00;
 }
 h2 {
@@ -262,7 +262,7 @@ xa {
 a:hover {
   text-decoration: underline;
 }
-pre {
+pre, style {
   text-align: left;
   font-size: 1.2rem;
   padding: 10px 20px;
@@ -276,11 +276,9 @@ pre b {
   color: #c61800;
   text-shadow: #c61800 0 0 1px;
 /*letter-spacing: -1px;*/}
-pre em {
+pre em, em {
   font-weight: normal;
   font-style: normal;
-  color: #18a600;
-  text-shadow: #18a600 0 0 1px;
 }
 div.example {
   display: block;
@@ -344,7 +342,9 @@ div.example {
   padding: 3px 5px;
   border: none;
 }
-.slide.object {padding:0;}
+.slide.object {padding:0;
+  width: 910px;
+  height: 710px;}
 .object object {width: 100%; height: 100%;}
 .notes {
   display: none;
@@ -362,7 +362,7 @@ section * {
 
 .current .enlargenslowly {
   display: inline-block;
-  -webkit-animation: enlargen 1s alternate 6 3s;
+  -webkit-animation: enlargen 1s alternate 12 1s;
 }
 
 @-webkit-keyframes enlargen {
