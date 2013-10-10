@@ -95,7 +95,8 @@
         <li>Duration always comes before delay in shorthand</li>
         <li>Timing function can be animated</li>
         <li>Timing function steps() to animate sprites</li>
-        <li>Fill mode controls before and after animation</li>
+        <li>Fill mode controls before and after animation<br/>&nbsp;</li>
+        <li>IE10, FF unprefixed since 16, Webkit with prefix, Opera.</li>
     </section>
 </div>
 
@@ -130,23 +131,67 @@ addNotes: function(){
   <header><h1>CubeeDoo</h1></header>
     <section class="content">
       <object data="http://cubeedoo.github.com/Cubeedoo/index.html" width="340" height="440" style="float: left; margin-right: 40px"></object>
-      <ul>
+      <ul style="margin-left: 340px;">
         <li>animation</li>
         <li>localStorage</li>
         <li>sessionStorage</li>
         <li>selectors API</li>
-        <li>custom data attributes/dataSet API</li>
+        <li>custom data attrs/dataSet API</li>
         <li>CSS Generated Content</li>
         <li>application cache</li>
         <li>Transitions</li>
         <li>Transforms</li>
         <li>Audio</li>
+      </ul>
+      <p>Also, JSON.stringify, touch events, classList</p>
+    </section>
+</div>
+
+
+<div class="slide">
+  <header><h1>LocalStorage </h1></header>
+    <section class="content">
+<pre contenteditable>
+localStorage.setItem('keyname', 'data value')
+
+localStorage.getItem('keyname')
+localStorage.keyname
+
+localStorage.removeItem('keyname');
+
+localStorage.clear();
+
+localStorage.key(position)
+
+localStorage.length</pre>
     </section>
 </div>
 
 <div class="slide">
-  <header><h1>Pause / New Button</h1></header>
+  <header><h1>SessionStorage</h1></header>
     <section class="content">
+<pre contenteditable>
+sessionStorage.setItem('keyname', 'data value')
+
+sessionStorage.getItem('keyname')
+sessionStorage.keyname
+
+sessionStorage.removeItem('keyname');
+
+sessionStorage.clear();
+
+sessionStorage.key(position)
+
+sessionStorage.length</pre>
+    </section>
+</div>
+
+
+
+<div class="slide">
+  <header><h1>Touch Events</h1></header>
+    <section class="content">
+      <p>The 'Pause' and 'New' button event handler</p>
 <pre contenteditable><strong>eventHandlers:</strong> function(){
  if('ontouchstart' in window ||
     'createTouch' in document ||
@@ -160,7 +205,16 @@ addNotes: function(){
     }
   },</pre>
 
-    <pre contenteditable><strong>pauseGameOrNewGame:</strong> function(){
+
+    </section>
+</div>
+
+
+
+<div class="slide">
+  <header><h1>Pause / New Button</h1></header>
+    <section class="content">
+<pre contenteditable><strong>pauseGameOrNewGame:</strong> function(){
   if (qbdoo.game.<strong>classList.contains('over')</strong>) {
     qbdoo.startNewGame();
   } else {
@@ -200,9 +254,18 @@ addNotes: function(){
     </section>
 </div>
 
+<div class="slide">
+  <header><h1>JSON.stringify()</h1></header>
+    <section class="content">
+      <p><code><em>JSON.stringify</em></code> converts an object to JSON notation representing it.</p>
+      <p>IE8+, and all other browsers</p>
+    </section>
+</div>
+
+
 <div class="slide intro">
   <header><hgroup><h1>Selectors API</h1></hgroup></header>
-    <section class="content">
+    <section class="content"><p>IE8+, and all other browsers</p>
     </section>
 </div>
 
@@ -262,7 +325,7 @@ var chil = el.<strong>querySelectorAll</strong>('.foo'); **</pre>
 
 <div class="slide intro">
   <header><hgroup><h1>classList</h1></hgroup></header>
-    <section class="content">
+    <section class="content"><p>IE10+, Android 3+, and all other browsers</p>
     </section>
 </div>
 
@@ -598,6 +661,15 @@ for (var i = 1; i <= qbdoo.cardCount; i++) {
 </div>
 
 
+<div class="slide object">
+  <header><h1>CubeeDoo</h1></header>
+  <object data="http://cubeedoo.github.com/Cubeedoo/"></object>
+  <a href="http://cubeedoo.github.com/Cubeedoo/" class="objectlink" target="play">Play</a>
+ </div>
+
+
+
+
 <div class="slide">
   <header><h1>Generated Content</h1></header>
     <section class="content">
@@ -722,6 +794,7 @@ FALLBACK:
     <section class="content">
     </section>
 </div>
+
 <div class="slide object">
   <object data="objects/transforms.html"></object>
   <header><h1></h1></header>
@@ -940,8 +1013,17 @@ playSound: function(matched){
 <h2><a href="http://www.standardista.com">www.standardista.com</a></h2>
 <h2><a href="http://www.twitter.com/estellevw">@estellevw</a></h2>
 <h2><a href="http://www.twitter.com/standardista">@standardista</a></h2>
-<div style="float:right"><img src="http://akamaicovers.oreilly.com/images/0636920021711/cat.gif" alt="MObile HTML5" style="margin: 0 20px;"/></div>
+<div style="float:right; margin-top: -80px;"><img src="http://akamaicovers.oreilly.com/images/0636920021711/cat.gif" alt="MObile HTML5" style="margin: 0 20px;"/>
+<img style="width: 200px;" src="https://learnable.com/books/html5-css3-for-the-real-world/online/figures/cover.png" alt="HTML5 and CSS3 for the Real World"></div>
 </section>
+</div>
+
+
+<div class="slide object">
+  <object data="http://estelle.github.io"></object>
+  <header><h1></h1></header>
+    <section class="content">
+    </section>
 </div>
 
 
