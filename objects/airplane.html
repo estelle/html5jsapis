@@ -1,0 +1,42 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+
+    <link rel="stylesheet" href="object.css"/>
+<style>
+
+div {display: block;
+margin: auto;
+width: 5rem;
+font-size: 5rem;
+outline: 1px solid red;
+color: #e00;
+pointer-events:none;}
+ul {padding-top: 400px}
+</style>
+
+<style contenteditable>.plane {
+  display: block;
+  transform: translate(-80px, 200px);
+  transform: rotate(15deg);
+  transform: scale(1.5, 2);
+  transform: skewX(-8deg);
+  transform: translate(-80px, 200px) rotate(-15deg)
+     scale(2, 1.5) skewX(8deg);
+}</style>
+<title></title>
+</head>
+
+<body>
+<div>
+<b class="plane">✈</b>
+</div>
+<ul>
+  <li>Add the prefix if needed.
+  <li>Only the last transform will impact the plane.
+  <li>Note the plane has it's own  context
+</body>
+</html>
+

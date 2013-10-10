@@ -26,13 +26,16 @@
       <h1>HTML5 JavaScript APIs</h1>
       <h2>Estelle Weyl</h2>
      </hgroup></header>
+     <p>http://estelle.github.com/html5jsapis/
     </div>
 
     <div class="slide intro">
      <header><hgroup>
-      <h1><span class="enlargenslowly">4,213</span> HTML5 JavaScript APIs</h1>
+      <h1><span class="enlargenslowly">4,213</span> HTML5, JavaScript and CSS APIs</h1>
       <h2>Estelle Weyl</h2>
      </hgroup></header>
+
+     <p>http://estelle.github.com/html5jsapis/
     </div>
 
 <div class="slide object">
@@ -82,6 +85,19 @@
  </section>
 </div>
 
+<div class="slide">
+  <header><h1>Animation Essentials</h1></header>
+    <section class="content">
+      <ul>
+        <li>Use CSS for animation instead of JS</li>
+        <li>Keyframe ident can be re-used</li>
+        <li>Negative delay makes animation start midway thru iteration</li>
+        <li>Duration always comes before delay in shorthand</li>
+        <li>Timing function can be animated</li>
+        <li>Timing function steps() to animate sprites</li>
+        <li>Fill mode controls before and after animation</li>
+    </section>
+</div>
 
 <div class="slide normal">
 <header><h1><b style="color: black">Deck Feature:</b><br>You can take notes</h1></header>
@@ -647,13 +663,22 @@ for (var i = 1; i <= qbdoo.cardCount; i++) {
 </div>
 
 <div class="slide">
+  <header><h1>ApplicationCache</h1></header>
+    <section class="content">
+      <pre contenteditable="">&lt;!doctype HTML&gt;
+&lt;html manifest="cubeedoo.manifest"&gt;
+&lt;meta charset="utf-8"/&gt;
+&lt;title&gt;....</pre>
+    </section>
+</div>
+
+<div class="slide">
       <header>
-         <h1>ApplicationCache
+         <h1>Cache Manifest File
          </h1>
       </header>
 
       <section class="content">
-      <pre contenteditable="">&lt;!doctype HTML&gt;<br>&lt;html manifest="cache.manifest"&gt;<br>&lt;meta charset="utf-8"/&gt;...</pre>
       <pre contenteditable="">CACHE MANIFEST
 #version01
 
@@ -669,7 +694,7 @@ signin.php
 dosomething.cgi
 
 FALLBACK:
-404.html</pre>
+/ 404.html</pre>
 </div>
 
 
@@ -680,7 +705,7 @@ FALLBACK:
       </header>
       <section class="content">
       <p>Add to .htaccess file</p>
-      <pre contenteditable="">AddType text/cache-manifest manifest</pre>
+      <pre contenteditable="">AddType text/cache-manifest .appcache</pre>
       <pre contenteditable="">if(window.applicationCache){
  var appCache = window.applicationCache;
  appCache.update();
@@ -704,21 +729,81 @@ FALLBACK:
     </section>
 </div>
 
+<!-- Transitions -->
+<div class="slide normal">
+     <header><h1>2D Transform Functions</h1></header>
+     <section class="content">
+   <dl class="deprecated listed wide">
+
+  <dt><strong>translate</strong>(&lt;length&gt;[, &lt;length&gt;])</dt>
+  <dd>specifies a 2D translation by the vector [x, y], where x is the  translation-value parameter for the x axis and y  is the optional translation value along the y axis. parameter. If <em>y</em> is not provided, y==0.</dd>
+  <dt><strong>translateX</strong>(&lt;length&gt;)</dt>
+  <dd>specifies a translation by the given amount in the X direction.</dd>
+  <dt><strong>translateY</strong>(&lt;length&gt;)</dt>
+  <dd>specifies a translation by the given amount in the Y direction.</dd>
+  <dt><strong>scale</strong>(&lt;number&gt;[, &lt;number&gt;])</dt>
+  <dd>specifies 2D scaling operation by the [sx,sy]. If sy  is not provided, sy will equal sx (growsing or shrinking with the same scale). Scale(1, 1)  or scale(1) leaves an element in it's default state. Scale(2, 2) or scale(2)  causes the element to appear twice as wide and twice as tall as its default size, taking up 4-times the original area.</dd>
+  <dt><strong>scaleX</strong>(&lt;number&gt;)</dt>
+  <dd>specifies a scale operation using the [sx, 1] scaling vector, where sx is given as the parameter.</dd>
+  <dt><strong>scaleY</strong>(&lt;number&gt;)</dt>
+  <dd>specifies a scale operation using the [1, sy] scaling vector, where sy is given as the parameter.</dd>
+  <dt><strong>rotate</strong>(&lt;angle&gt;)</dt>
+  <dd>specifies a 2D rotation by the angle specified in the parameter about the origin of the element, as defined by the <em>transform-origin</em> property. For example, rotate(90deg) would cause elements to appear rotated one-quarter of a turn in the clockwise direction.</dd>
+  <dt><strong>skewX</strong>(&lt;angle&gt;)</dt>
+  <dd>specifies a skew transformation along the X axis by the given angle.</dd>
+  <dt><strong>skewY</strong>(&lt;angle&gt;)</dt>
+  <dd>specifies a skew transformation along the Y axis by the given angle.</dd>
+    <dt><strong>matrix</strong>(&lt;num&gt;, &lt;num&gt;, &lt;num&gt;, &lt;num&gt;, &lt;num&gt;, &lt;num&gt;)</dt>
+  <dd>Generally machine generated, specifies a 2D transformation in the form of a transformation matrix of six values. matrix(a,b,c,d,e,f) is equivalent to applying the transformation matrix <strong>[a b c d e f]</strong>.</dd>
+</dl>
+     </section>
+ </div>
+
+
+<!-- example transform -->
+<div class="slide" id="gencontentlink">
+<header><h1>Multiple Tranforms</h1></header>
+<section class="content"
+<ul id="ABTrasform">
+<li><b class="y">translate</b> <pre class="x">transform: <span contenteditable="" id="Atranslate">translate(-80px, 200px);</span></pre></li>
+<li><b class="y">rotate</b> <pre class="x">transform: <span contenteditable="" id="Arotate">rotate(15deg);</span></pre></li>
+<li><b class="y">scale</b> <pre class="x">transform: <span contenteditable="" id="Ascale">scale(1.5, 2);</span></pre></li>
+<li><b class="y">skew</b> <pre class="x">transform: <span contenteditable="" id="Askew">skewX(-8deg);</span></pre></li>
+<li>multiple transforms <pre>transform: <span contenteditable="" id="Btranslate">translate(-80px, 200px)</span>
+  <span contenteditable="" id="Brotate">rotate(-15deg)</span> <span contenteditable="" id="Bscale">scale(2, 1.5)</span> <span contenteditable="" id="Bskew">skewX(8deg)</span>;</pre></li>
+</ul>
+</section>
+</div>
+
+
+<div class="slide object">
+  <header><h1>Transforms</h1></header>
+  <object data="objects/airplane.html"></object>
+  <a href="objects/airplane.html" class="objectlink" target="play">Play</a>
+ </div>
+
+
+<div class="slide">
+  <header><h1>transform-origin property</h1></header>
+    <section class="content">
+
+<p>Specifies the x and y position of the origin, relative to the transform object.</p>
+
+<ul>
+    <li>Keyword positions: left, right, bottom, top, center</li>
+    <li>Length values</li>
+    <li>Percentage values </li>
+    <li>default is 50% 50% (or center center)</li>
+    <li>Supported in all browsers that support transform. Prefixed if transform is prefixed</li>
+    </section>
+</div>
+
 
 <div class="slide intro">
   <header><hgroup><h1>Transitions</h1></hgroup></header>
     <section class="content">
     </section>
 </div>
-<div class="slide object">
-  <object data="objects/transition.html"></object>
-  <header><h1></h1></header>
-    <section class="content">
-    </section>
-</div>
-
-
-
 <div class="slide">
 <header><h1>transitions</h1></header>
 <section class="content">
@@ -734,6 +819,16 @@ FALLBACK:
      </ul>
 </section>
 </div>
+<div class="slide object">
+  <object data="objects/transition.html"></object>
+  <header><h1></h1></header>
+    <section class="content">
+    </section>
+</div>
+
+
+
+
 
 
 <div class="slide object">
@@ -815,6 +910,39 @@ playSound: function(matched){
     </section>
 </div>
 
+<div class="slide">
+  <header><h1>&lt;audio&gt;</h1></header>
+    <section class="content">
+      <ul class="inverted">
+        <li><code><em>controls</em>          </code> shows controls</li>
+        <li><code><em>loop </em>             </code> loops the audio</li>
+        <li><code><em>autoplay </em>         </code> don't do this!</li>
+        <li><code><em>preload</em> = none | auto | metadata</code></li>
+        <li><code>audio.<em>play()</em></code></li>
+        <li><code>audio.<em>pause()</em></code></li>
+        <li><code>audio.<em>volume</em> += 0.1</code> or -</li>
+</ul>
+
+        </section>
+</div>
+
+<div class="slide intro">
+  <header><hgroup><h1>Forms</h1><p><a href="http://estelle.github.io/forms">http://estelle.github.io/forms</a></p></hgroup></header>
+    <section class="content">
+
+    </section>
+</div>
+<!-- Thank you -->
+<div class="slide normal">
+<header><h1>Thanks</h1></header>
+<section class="content">
+<h1 class="textmask">Estelle Weyl</h1>
+<h2><a href="http://www.standardista.com">www.standardista.com</a></h2>
+<h2><a href="http://www.twitter.com/estellevw">@estellevw</a></h2>
+<h2><a href="http://www.twitter.com/standardista">@standardista</a></h2>
+<div style="float:right"><img src="http://akamaicovers.oreilly.com/images/0636920021711/cat.gif" alt="MObile HTML5" style="margin: 0 20px;"/></div>
+</section>
+</div>
 
 
 
