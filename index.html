@@ -31,72 +31,32 @@
 
     <div class="slide intro">
      <header><hgroup>
-      <h1><span class="enlargenslowly">4,213</span> HTML5, JavaScript and CSS APIs</h1>
+      <h1><span class="enlargenslowly">∞</span> HTML5, JavaScript and CSS APIs</h1>
       <h2>Estelle Weyl</h2>
      </hgroup></header>
 
      <p>http://estelle.github.com/html5jsapis/
     </div>
 
-<div class="slide object">
-  <object data="objects/animatedtext.html"></object>
-  <header><h1></h1></header>
-    <section class="content">
-    </section>
-</div>
 
-<!--
-<div class="slide normal">
-<header><h1 class="enlargenslowly" style="-webkit-transform-origin: left center;">Animation</h1></header>
-<section class="content">
-<pre contenteditable>.enlargenslowly {
-  display: inline-block;
-  -webkit-animation: enlargen 1s alternate 12 1s;
-  animation: enlargen 1s alternate 12 1s;
-}
-
-@-webkit-keyframes enlargen {
-  100% { -webkit-transform: scale(1.2); }
-}
-@keyframes enlargen {
-  100% { transform: scale(1.2); }
-}</pre>
-</section>
-</div>
--->
 
 <div class="slide">
- <header>
-    <h1>Animation Essentials</h1>
- </header>
- <section class="content">
-     <ul class="imp">
-        <li>@keyframes</li>
-        <li>animation-name</li>
-        <li>animation-duration</li>
-        <li>animation-direction</li>
-        <li>animation-iteration-count</li>
-        <li>animation-delay<br></li>
-        <li>animation-timing-function</li>
-        <li>animation-fill-mode</li>
-        <li>animation-play-state</li>
+  <header><h1>CubeeDoo</h1></header>
+    <section class="content">
+      <object data="http://cubeedoo.github.com/Cubeedoo/index.html" width="340" height="500" style="float: left; margin-right: 40px"></object>
+      <ul style="margin-left: 340px;">
+        <li>localStorage</li>
+        <li>sessionStorage</li>
+        <li>selectors API</li>
+        <li>custom data attrs/dataSet API</li>
+        <li>CSS Generated Content</li>
+        <li>application cache</li>
+        <li>Transforms</li>
+        <li>Transitions</li>
+        <li>animation</li>
+        <li>Audio</li>
       </ul>
-      <p><a href="http://estelle.github.io/animation/">See Tutorial</a></p>
- </section>
-</div>
-
-<div class="slide">
-  <header><h1>Animation Essentials</h1></header>
-    <section class="content">
-      <ul>
-        <li>Use CSS for animation instead of JS</li>
-        <li>Keyframe ident can be re-used</li>
-        <li>Negative delay makes animation start midway thru iteration</li>
-        <li>Duration always comes before delay in shorthand</li>
-        <li>Timing function can be animated</li>
-        <li>Timing function steps() to animate sprites</li>
-        <li>Fill mode controls before and after animation<br/>&nbsp;</li>
-        <li>IE10, FF unprefixed since 16, Webkit with prefix, Opera.</li>
+      <p>Also, JSON.stringify, touch events, classList</p>
     </section>
 </div>
 
@@ -127,25 +87,7 @@ addNotes: function(){
     </section>
 </div>
 
-<div class="slide">
-  <header><h1>CubeeDoo</h1></header>
-    <section class="content">
-      <object data="http://cubeedoo.github.com/Cubeedoo/index.html" width="340" height="440" style="float: left; margin-right: 40px"></object>
-      <ul style="margin-left: 340px;">
-        <li>animation</li>
-        <li>localStorage</li>
-        <li>sessionStorage</li>
-        <li>selectors API</li>
-        <li>custom data attrs/dataSet API</li>
-        <li>CSS Generated Content</li>
-        <li>application cache</li>
-        <li>Transitions</li>
-        <li>Transforms</li>
-        <li>Audio</li>
-      </ul>
-      <p>Also, JSON.stringify, touch events, classList</p>
-    </section>
-</div>
+
 
 
 <div class="slide">
@@ -209,7 +151,22 @@ sessionStorage.length</pre>
     </section>
 </div>
 
-
+<div class="slide">
+  <header><h1>Event Order</h1></header>
+    <section class="content">
+<ol>
+  <li>touchstart
+  <li>touchmove
+  <li>touchend
+  <li>mouseover
+  <li>mousemove
+  <li>mousedown
+  <li>mouseup
+  <li>click
+</ol>
+<h1>User may have touch &amp; mouse!</h1>
+    </section>
+</div>
 
 <div class="slide">
   <header><h1>Pause / New Button</h1></header>
@@ -910,6 +867,52 @@ FALLBACK:
     <section class="content">
     </section>
 </div>
+
+<div class="slide object">
+  <object data="objects/animatedtext.html"></object>
+  <header><h1></h1></header>
+    <section class="content">
+    </section>
+</div>
+
+
+<div class="slide">
+ <header>
+    <h1>Animation Essentials</h1>
+ </header>
+ <section class="content">
+     <ul class="imp">
+        <li>@keyframes</li>
+        <li>animation-name</li>
+        <li>animation-duration</li>
+        <li>animation-direction</li>
+        <li>animation-iteration-count</li>
+        <li>animation-delay<br></li>
+        <li>animation-timing-function</li>
+        <li>animation-fill-mode</li>
+        <li>animation-play-state</li>
+      </ul>
+      <p><a href="http://estelle.github.io/animation/">See Tutorial</a></p>
+ </section>
+</div>
+
+<div class="slide">
+  <header><h1>Animation Essentials</h1></header>
+    <section class="content">
+      <ul>
+        <li>Use CSS for animation instead of JS</li>
+        <li>Keyframe ident can be re-used</li>
+        <li>Negative delay makes animation start midway thru iteration</li>
+        <li>Duration always comes before delay in shorthand</li>
+        <li>Timing function can be animated</li>
+        <li>Timing function steps() to animate sprites</li>
+        <li>Fill mode controls before and after animation<br/>&nbsp;</li>
+        <li>IE10, FF unprefixed since 16, Webkit with prefix, Opera.</li>
+    </section>
+</div>
+
+
+
 
 <div class="slide intro">
   <header><hgroup><h1>Audio</h1></hgroup></header>
